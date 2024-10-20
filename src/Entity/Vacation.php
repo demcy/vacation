@@ -3,34 +3,58 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\VocationRepository;
+use App\Repository\VacationRepository;
+use App\State\VacationSetOwnerProcessor;
+use App\Validator\VacationDaysNumber;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: VocationRepository::class)]
-#[ApiResource]
-class Vocation
+#[ORM\Entity(repositoryClass: VacationRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['vacation:read']],
+    denormalizationContext: ['groups' => ['vacation:write']],
+    security: "is_granted('ROLE_USER')",
+    processor: VacationSetOwnerProcessor::class
+)]
+#[VacationDaysNumber]
+class Vacation
 {
     use TimestampableEntity;
+
+    #[Groups(['vacation:read'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
+    #[Groups(['vacation:read', 'vacation:write'])]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $start_date = null;
 
+    #[Assert\NotBlank]
+    #[Groups(['vacation:read', 'vacation:write'])]
     #[ORM\Column]
     private ?int $days_number = null;
 
+    #[Assert\NotBlank]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
+    #[Groups(['vacation:read', 'vacation:write'])]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
 
+    #[Groups(['vacation:read', 'vacation:write'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'vocations')]
+
+    #[ORM\ManyToOne(inversedBy: 'vacations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

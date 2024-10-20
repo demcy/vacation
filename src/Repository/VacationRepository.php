@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Vocation;
+use App\Entity\Vacation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Vocation>
+ * @extends ServiceEntityRepository<Vacation>
  */
-class VocationRepository extends ServiceEntityRepository
+class VacationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Vocation::class);
+        parent::__construct($registry, Vacation::class);
     }
 
     //    /**
-    //     * @return Vocation[] Returns an array of Vocation objects
+    //     * @return Vacation[] Returns an array of Vacation objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class VocationRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Vocation
+    //    public function findOneBySomeField($value): ?Vacation
     //    {
     //        return $this->createQueryBuilder('v')
     //            ->andWhere('v.exampleField = :val')

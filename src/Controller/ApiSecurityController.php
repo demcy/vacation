@@ -132,19 +132,27 @@ class ApiSecurityController extends AbstractController
         );
     }
 
-    #[Route(path: 'api/login', name: 'app_api_login')]
+    #[Route(path: 'api/login', name: 'app_api_login', methods: ['POST'])]
     public function login(#[CurrentUser] $user = null): Response
     {
-        try {
-            return $this->json(
-                $this->normalizer->normalize($user, 'array', ['groups' => 'user:read'])
-                , Response::HTTP_OK
-            );
-        } catch (ExceptionInterface $e) {
-            return $this->json([
-                'message' => 'Could not normalize user: '.$e->getMessage(),
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        if ($this->registrationService->isAccountVerified($user->getEmail())) {
+            try {
+                return $this->json(
+                    $this->normalizer->normalize($user, 'array', ['groups' => 'user:read'])
+                    , Response::HTTP_OK
+                );
+            } catch (ExceptionInterface $e) {
+                return $this->json([
+                    'message' => 'Could not normalize user: ' . $e->getMessage(),
+                ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
         }
+        return $this->json(
+            [
+                'message' => 'Account is not verified',
+            ],
+            Response::HTTP_BAD_REQUEST,
+        );
     }
 
     #[Route(path: 'api/logout', name: 'app_api_logout')]

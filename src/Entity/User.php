@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
-    #[Groups('user:read')]
+    #[Groups('user:read', 'vacation:read')]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -42,18 +42,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     /**
-     * @var Collection<int, Vocation>
+     * @var Collection<int, Vacation>
      */
     #[Groups('user:read')]
-    #[ORM\OneToMany(targetEntity: Vocation::class, mappedBy: 'user', orphanRemoval: true)]
-    private Collection $vocations;
+    #[ORM\OneToMany(targetEntity: Vacation::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $vacations;
 
     #[ORM\Column]
     private ?bool $is_verified = null;
 
     public function __construct()
     {
-        $this->vocations = new ArrayCollection();
+        $this->vacations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,29 +132,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Vocation>
+     * @return Collection<int, Vacation>
      */
-    public function getVocations(): Collection
+    public function getVacations(): Collection
     {
-        return $this->vocations;
+        return $this->vacations;
     }
 
-    public function addVocation(Vocation $vocation): static
+    public function addVacation(Vacation $vacation): static
     {
-        if (!$this->vocations->contains($vocation)) {
-            $this->vocations->add($vocation);
-            $vocation->setUser($this);
+        if (!$this->vacations->contains($vacation)) {
+            $this->vacations->add($vacation);
+            $vacation->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeVocation(Vocation $vocation): static
+    public function removeVacation(Vacation $vacation): static
     {
-        if ($this->vocations->removeElement($vocation)) {
+        if ($this->vacations->removeElement($vacation)) {
             // set the owning side to null (unless already changed)
-            if ($vocation->getUser() === $this) {
-                $vocation->setUser(null);
+            if ($vacation->getUser() === $this) {
+                $vacation->setUser(null);
             }
         }
 

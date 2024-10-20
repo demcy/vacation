@@ -37,6 +37,15 @@ readonly class RegistrationService
         return $user !== null;
     }
 
+    public function isAccountVerified(string $email): bool
+    {
+        $user = $this->userRepository->findOneBy(['email' => $email]);
+        if ($user) {
+            return $user->isVerified();
+        }
+        return false;
+    }
+
     /**
      * @throws Exception
      */
@@ -66,7 +75,7 @@ readonly class RegistrationService
             '">Follow the link to verify registration!</a>';
         $message = (new Email())
             ->from($email)
-            ->to('vocation@vocation.com')
+            ->to('vacation@vacation.com')
             ->subject('Registration New User!')
             ->text($message_text)
             ->html($message_html);
