@@ -1,0 +1,80 @@
+services:
+  apache:
+    build:
+      context: ./apache
+      args:
+        - APACHE_IMAGE=${APACHE_IMAGE}
+    container_name: ${COMPOSE_PROJECT_NAME}_apache
+    ports:
+      - ${MAIN_PORT}:80
+      - ${SSL_PORT}:443
+    volumes:
+      - ../public:/usr/local/apache2/htdocs
+      - ./apache/apache.conf:/usr/local/apache2/conf/apache.conf
+      - ./apache/server.key:/usr/local/apache2/conf/server.key
+      - ./apache/server.crt:/usr/local/apache2/conf/server.crt
+    environment:
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+    networks:
+      - default
+  php-fpm:
+    build: 
+      context: ./php-fpm
+      args:
+        - UID=${UID}
+        - GID=${GID}
+        - PHP_IMAGE=${PHP_IMAGE}
+        - GIT_USER_EMAIL=${GIT_USER_EMAIL}
+        - GIT_USER_NAME=${GIT_USER_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_php-fpm
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    expose:
+      - 9000
+    volumes:
+      - ../:/var/www/html
+      - ./php-fpm/php-dev.ini:/usr/local/etc/php/php.ini
+      - ~/.ssh/id_ed25519:/home/www-data/.ssh/id_ed25519
+      - ~/.ssh/id_ed25519.pub:/home/www-data/.ssh/id_ed25519.pub
+      - ~/.ssh/known_hosts:/home/www-data/.ssh/known_hosts
+      - ${SSH_AUTH_SOCK}:/ssh-agent
+    networks:
+      - default
+  mysql:
+    image: ${MYSQL_IMAGE}
+    container_name: ${COMPOSE_PROJECT_NAME}_mysql
+    ports:
+      - ${MYSQL_PORT}:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - default
+  phpmyadmin:
+    image: ${PMA_IMAGE}
+    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
+    ports:
+      - ${PMA_PORT}:80
+    volumes:
+     - pma_sessions:/sessions
+    environment:
+      PMA_HOST: ${COMPOSE_PROJECT_NAME}_mysql
+    networks:
+      - default
+  mailcatcher:
+    image: ${MAILCATCHER_IMAGE}
+    container_name: ${COMPOSE_PROJECT_NAME}_mailcatcher
+    ports:
+      - ${MAILCATCHER_PORT}:1080
+    expose:
+      - 1025
+volumes:
+  mysql_data:
+  pma_sessions:
+networks:
+  default:
