@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\VacationRepository;
 use App\State\VacationSetOwnerProcessor;
@@ -10,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+//use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,8 +34,14 @@ class Vacation
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ApiProperty(
+        openapiContext: [
+            'type' => 'string',
+            'format' => 'date'
+        ]
+    )]
     #[Assert\NotBlank]
-    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
+    #[Context([DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
     #[Groups(['vacation:read', 'vacation:write'])]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $start_date = null;
@@ -43,8 +51,14 @@ class Vacation
     #[ORM\Column]
     private ?int $days_number = null;
 
+    #[ApiProperty(
+        openapiContext: [
+            'type' => 'string',
+            'format' => 'date'
+        ]
+    )]
     #[Assert\NotBlank]
-    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
+    #[Context([DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
     #[Groups(['vacation:read', 'vacation:write'])]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
@@ -55,7 +69,7 @@ class Vacation
 
 
     #[ORM\ManyToOne(inversedBy: 'vacations')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -121,5 +135,11 @@ class Vacation
         $this->user = $user;
 
         return $this;
+    }
+
+    #[Groups(['vacation:read'])]
+    public function getUserId(): int
+    {
+        return $this->user->getId();
     }
 }

@@ -1,8 +1,8 @@
-# VOCATION APP
+# VACATION APP
 ## ACTIONS TO LAUNCH
 1. ENTER TO THE DIRECTORY
 ```
-cd vocation
+cd vacation
 ```
 2. START SERVER
 ```
@@ -12,25 +12,29 @@ docker/up.sh
 ```
 docker/php.sh
 ```
-4. CREATE SCHEMA FOR DATABASE USING SHELL FOR PHP-FPM CONTAINERh
+4. CREATE SCHEMA FOR DATABASE USING SHELL FOR PHP-FPM CONTAINER
 ```
 symfony console doctrine:schema:create
 ```
 
 ## DEVELOPMENT SECTION
+http://localhost:9000
+https://localhost:9001
+https://localhost:9002
+https://localhost:9004
 * TO UPDATE SCHEMA
 ```
-symfony console doctrine:schema:update
+symfony console doctrine:schema:update --force
 ```
+Content-Type = application/ld+json
+PATCH = application/merge-patch+json
 
-allow pasting
+```
 fetch('/api/login', {
 method: 'POST',
-headers: {
-'Content-Type': 'application/json',
-},
+headers: {'Content-Type': 'application/json'},
 body: JSON.stringify({
-email: 'vocation_user@vocation.ee',
+email: 'vacation_user@vacation.com',
 password: 'aA@45678'
 }),
 })
@@ -46,3 +50,5 @@ console.log('Login failed:', data.message);
 .catch(error => {
 console.error('Error:', error);
 });
+```
+
