@@ -1,5 +1,5 @@
-import { Book } from "../../interfaces/Book";
+import { Vacation_Request } from "../../interfaces/Vacation_Request";
 
-type TResource = Book;
+type TResource = Vacation_Request;
 
 export default TResource;

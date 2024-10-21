@@ -1,9 +1,8 @@
 import { ApiResource } from "../utils/types";
 
-export interface Book extends ApiResource {
-  book?: string;
-  condition?: any;
-  title?: string;
-  author?: string;
-  rating?: number;
+export interface Vacation_Request extends ApiResource {
+  start_date?: string;
+  days_number?: number;
+  end_date?: string;
+  comment?: string;
 }

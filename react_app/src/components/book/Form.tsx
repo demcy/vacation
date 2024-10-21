@@ -52,7 +52,7 @@ const Form = ({ onSubmit, error, reset, initialValues }: FormProps) => {
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <Field
         register={register}
-        name="book"
+        name="start_date"
         placeholder=""
         type="text"
         required
@@ -60,7 +60,7 @@ const Form = ({ onSubmit, error, reset, initialValues }: FormProps) => {
       />
       <Field
         register={register}
-        name="condition"
+        name="days_number"
         placeholder=""
         type="text"
         required
@@ -68,23 +68,16 @@ const Form = ({ onSubmit, error, reset, initialValues }: FormProps) => {
       />
       <Field
         register={register}
-        name="title"
-        placeholder=""
-        type="text"
-        errors={errors}
-      />
-      <Field
-        register={register}
-        name="author"
-        placeholder=""
-        type="text"
-        errors={errors}
-      />
-      <Field
-        register={register}
-        name="rating"
+        name="end_date"
         placeholder=""
         type="number"
+        errors={errors}
+      />
+      <Field
+        register={register}
+        name="comment"
+        placeholder=""
+        type="text"
         errors={errors}
       />
 

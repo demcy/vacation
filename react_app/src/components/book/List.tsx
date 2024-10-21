@@ -80,7 +80,7 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
 
 const List = () => {
   const { page } = useParams<{ page?: string }>();
-  const id = (page && decodeURIComponent(page)) || "admin/books";
+  const id = (page && decodeURIComponent(page)) || "books";
 
   const { retrieved, loading, error } =
     useRetrieve<PagedCollection<TResource>>(id);

@@ -11,13 +11,13 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
-//use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VacationRepository::class)]
 #[ApiResource(
+    shortName: 'vacation_requests',
     normalizationContext: ['groups' => ['vacation:read']],
     denormalizationContext: ['groups' => ['vacation:write']],
     security: "is_granted('ROLE_USER')",

@@ -31,24 +31,26 @@ PATCH = application/merge-patch+json
 
 ```
 fetch('/api/login', {
-method: 'POST',
-headers: {'Content-Type': 'application/json'},
-body: JSON.stringify({
-email: 'vacation_user@vacation.com',
-password: 'aA@45678'
-}),
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        email: 'vacation_user@vacation.com',
+        password: 'aA@45678'
+    }),
 })
 .then(response => response.json())
 .then(data => {
-if (data.token) {
-console.log('Login successful, token:', data.token);
-// You can now use this token in subsequent requests or store it in localStorage
-} else {
-console.log('Login failed:', data.message);
-}
+    if (data.id) {
+        console.log('Login successful, data:', data);
+        // You can now use this token in subsequent requests or store it in localStorage
+    } else {
+        console.log('Login failed:', data.error);
+    }
 })
 .catch(error => {
-console.error('Error:', error);
+    console.error('Error:', error);
 });
 ```
 

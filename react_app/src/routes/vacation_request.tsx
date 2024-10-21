@@ -1,12 +1,12 @@
 import { Route } from "react-router-dom";
-import { List, Create, Update, Show } from "../components/book/";
+import { List, Create, Update, Show } from "../components/vacation_request/";
 
 const routes = [
-  <Route path="/books/create" element={<Create />} key="create" />,
-  <Route path="/books/edit/:id" element={<Update />} key="update" />,
-  <Route path="/books/show/:id" element={<Show />} key="show" />,
-  <Route path="/books" element={<List />} key="list" />,
-  <Route path="/books/:page" element={<List />} key="page" />,
+  <Route path="/vacation_requests/create" element={<Create />} key="create" />,
+  <Route path="/vacation_requests/edit/:id" element={<Update />} key="update" />,
+  <Route path="/vacation_requests/show/:id" element={<Show />} key="show" />,
+  <Route path="/vacation_requests" element={<List />} key="list" />,
+  <Route path="/vacation_requests/:page" element={<List />} key="page" />,
 ];
 
 export default routes;

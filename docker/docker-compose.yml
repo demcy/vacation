@@ -73,6 +73,24 @@ services:
       - ${MAILCATCHER_PORT}:1080
     expose:
       - 1025
+  react:
+    build:
+      context: ./react
+      args:
+        - NODE_IMAGE=${NODE_IMAGE}
+    image: ${NODE_IMAGE}
+    container_name: ${COMPOSE_PROJECT_NAME}_react
+    ports:
+      - ${REACT_PORT}:5173
+    volumes:
+      - ../react_app:/usr/src/app
+    environment:
+      NODE_ENV: development
+    command: ["npm", "run", "dev"]
+    #command: ["tail", "-f", "/dev/null"]  # Keeps the container running
+    tty: true
+    networks:
+      - default
 volumes:
   mysql_data:
   pma_sessions:

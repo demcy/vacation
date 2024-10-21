@@ -54,7 +54,7 @@ const CreateView = ({
 
 const Create = () => {
   const { created, loading, error, reset, create } = useCreate<TResource>({
-    "@id": "admin/books",
+    "@id": "books",
   });
 
   return (

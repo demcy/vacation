@@ -22,7 +22,7 @@ const CreateView = ({
   if (created) {
     return (
       <Navigate
-        to={`/books/edit/${encodeURIComponent(created["@id"])}`}
+        to={`/vacation_requests/edit/${encodeURIComponent(created["@id"])}`}
         replace
       />
     );
@@ -45,7 +45,7 @@ const CreateView = ({
       )}
 
       <Form onSubmit={create} error={error} reset={reset} />
-      <Link to="/books/" className="btn btn-primary">
+      <Link to="/vacation_requests/" className="btn btn-primary">
         Back to list
       </Link>
     </div>
@@ -54,7 +54,7 @@ const CreateView = ({
 
 const Create = () => {
   const { created, loading, error, reset, create } = useCreate<TResource>({
-    "@id": "admin/books",
+    "@id": "vacation_requests",
   });
 
   return (

@@ -17,7 +17,7 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
 
   return (
     <div>
-      <h1>Book List</h1>
+      <h1>Vacation Request List</h1>
 
       {loading && <div className="alert alert-info">Loading...</div>}
       {error && <div className="alert alert-danger">{error.message}</div>}
@@ -32,11 +32,10 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
         <thead>
           <tr>
             <th>id</th>
-            <th>book</th>
-            <th>condition</th>
-            <th>title</th>
-            <th>author</th>
-            <th>rating</th>
+            <th>start_date</th>
+            <th>days_number</th>
+            <th>end_date</th>
+            <th>comment</th>
             <th colSpan={2} />
           </tr>
         </thead>
@@ -51,19 +50,18 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
                   }}
                 />
               </th>
-              <td>{item["book"]}</td>
-              <td>{item["condition"]}</td>
-              <td>{item["title"]}</td>
-              <td>{item["author"]}</td>
-              <td>{item["rating"]}</td>
+              <td>{item["start_date"]}</td>
+              <td>{item["days_number"]}</td>
+              <td>{item["end_date"]}</td>
+              <td>{item["comment"]}</td>
               <td>
-                <Link to={`/books/show/${encodeURIComponent(item["@id"])}`}>
+                <Link to={`/vacation_requests/show/${encodeURIComponent(item["@id"])}`}>
                   <span className="fa fa-search" aria-hidden="true" />
                   <span className="sr-only">Show</span>
                 </Link>
               </td>
               <td>
-                <Link to={`/books/edit/${encodeURIComponent(item["@id"])}`}>
+                <Link to={`/vacation_requests/edit/${encodeURIComponent(item["@id"])}`}>
                   <span className="fa fa-pencil" aria-hidden="true" />
                   <span className="sr-only">Edit</span>
                 </Link>
@@ -80,7 +78,7 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
 
 const List = () => {
   const { page } = useParams<{ page?: string }>();
-  const id = (page && decodeURIComponent(page)) || "admin/books";
+  const id = (page && decodeURIComponent(page)) || "vacation_requests";
 
   const { retrieved, loading, error } =
     useRetrieve<PagedCollection<TResource>>(id);
