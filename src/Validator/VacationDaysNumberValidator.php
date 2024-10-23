@@ -26,6 +26,7 @@ class VacationDaysNumberValidator extends ConstraintValidator
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ days_number }}', $days_number)
                 ->setParameter('{{ result_days_number }}', $result_days_number)
+                ->setCode(1)
                 ->addViolation();
         }
     }

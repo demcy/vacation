@@ -36,7 +36,7 @@ const UpdateView = ({
   reset,
 }: UpdateProps) => {
   if (deleted) {
-    return <Navigate to="/books/" replace />;
+    return <Navigate to="/vacation_requests/" replace />;
   }
 
   const item = updated ? updated : retrieved;
@@ -51,7 +51,7 @@ const UpdateView = ({
 
   return (
     <div>
-      <h1>Edit Book {item && item["@id"]}</h1>
+      <h1>Edit Vacation Request: {item && item["@id"]}</h1>
 
       {created && (
         <div className="alert alert-success" role="status">
@@ -98,7 +98,7 @@ const UpdateView = ({
           initialValues={item}
         />
       )}
-      <Link to="/books/" className="btn btn-primary">
+      <Link to="/vacation_requests/" className="btn btn-primary">
         Back to list
       </Link>
       <button onClick={delWithConfirm} className="btn btn-danger">

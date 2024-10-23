@@ -22,7 +22,7 @@ const ShowView = ({
   retrieved: item,
 }: ShowProps) => {
   if (deleted) {
-    return <Navigate to="/books/" replace />;
+    return <Navigate to="/vacation_requests/" replace />;
   }
 
   const delWithConfirm = () => {
@@ -33,7 +33,7 @@ const ShowView = ({
 
   return (
     <div>
-      <h1>Show Book {item && item["@id"]}</h1>
+      <h1>Show Vacation Request: {item && item["@id"]}</h1>
 
       {loading && (
         <div className="alert alert-info" role="status">
@@ -63,33 +63,29 @@ const ShowView = ({
           </thead>
           <tbody>
             <tr>
-              <th scope="row">book</th>
-              <td>{item["book"]}retrieved</td>
+              <th scope="row">start_date</th>
+              <td>{item["start_date"]}</td>
             </tr>
             <tr>
-              <th scope="row">condition</th>
-              <td>{item["condition"]}retrieved</td>
+              <th scope="row">days_number</th>
+              <td>{item["days_number"]}</td>
             </tr>
             <tr>
-              <th scope="row">title</th>
-              <td>{item["title"]}retrieved</td>
+              <th scope="row">end_date</th>
+              <td>{item["end_date"]}</td>
             </tr>
             <tr>
-              <th scope="row">author</th>
-              <td>{item["author"]}retrieved</td>
-            </tr>
-            <tr>
-              <th scope="row">rating</th>
-              <td>{item["rating"]}retrieved</td>
+              <th scope="row">comment</th>
+              <td>{item["comment"]}</td>
             </tr>
           </tbody>
         </table>
       )}
-      <Link to="/books/" className="btn btn-primary">
+      <Link to="/vacation_requests/" className="btn btn-primary">
         Back to list
       </Link>
       {item && (
-        <Link to={`/books/edit/${encodeURIComponent(item["@id"])}`}>
+        <Link to={`/vacation_requests/edit/${encodeURIComponent(item["@id"])}`}>
           <button className="btn btn-warning">Edit</button>
         </Link>
       )}

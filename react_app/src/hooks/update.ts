@@ -58,8 +58,8 @@ const useUpdate = <Resource extends ApiResource>(): IUpdateStore<Resource> => {
       setLoading(true);
 
       const options = {
-        method: "PUT",
-        headers: new Headers({ "Content-Type": "application/ld+json" }),
+        method: "PATCH",
+        headers: new Headers({ "Content-Type": "application/merge-patch+json" }),
         body: JSON.stringify(values),
       };
 

@@ -30,7 +30,7 @@ const CreateView = ({
 
   return (
     <div>
-      <h1>Create Book</h1>
+      <h1>Create Vacation Request</h1>
 
       {loading && (
         <div className="alert alert-info" role="status">

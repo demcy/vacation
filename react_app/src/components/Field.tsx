@@ -1,3 +1,8 @@
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import {addDays, format, subDays} from "date-fns";
+
 import {
   DeepMap,
   FieldError,
@@ -25,6 +30,7 @@ const Field = <TFieldValues extends FieldValues>({
   required = false,
   errors,
 }: FieldProps<TFieldValues>) => {
+
   const inputProps: { className: string; "aria-invalid"?: boolean } = {
     className: "form-control",
   };
@@ -43,17 +49,31 @@ const Field = <TFieldValues extends FieldValues>({
       <label className="form-control-label" htmlFor={name}>
         {name}
       </label>
-      <input
-        id={name}
-        placeholder={placeholder}
-        type={type}
-        step={step}
-        {...inputProps}
-        {...register(name, {
-          required: "Required",
-          valueAsNumber: type === "number",
-        })}
-      />
+      {type === "date" ? (
+        <input
+          id={name}
+          placeholder={placeholder}
+          type="date" // Standard HTML input type
+          {...inputProps}
+          {...register(name, {
+            ...(required && {required: "Required"}),
+            //valueAsDate: true, // Ensure value is treated as a date
+          })}
+          min={new Date().toISOString().split("T")[0]} // Disable past dates
+        />
+      ) : (
+        <input
+          id={name}
+          placeholder={placeholder}
+          type={type}
+          step={step}
+          {...inputProps}
+          {...register(name, {
+            ...(required && {required: "Required"}),
+            valueAsNumber: type === "number",
+          })}
+        />
+      )}
       {errors[name] && (
         <div className="invalid-feedback">{errors[name]?.message}</div>
       )}

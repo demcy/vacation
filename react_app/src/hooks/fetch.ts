@@ -76,6 +76,9 @@ const submissionHandler = (response: Response, json: any) => {
   if (!json.violations) {
     return;
   }
+  if(json.violations[0].code == '1') {
+    return;
+  }
 
   const error =
     json["description"] ||

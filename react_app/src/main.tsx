@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 // Import your routes here
 import App from './App';
-import bookRoutes from './routes/book';
 import vacationRequestRoutes from './routes/vacation_request';
 import loginRoute from './routes/login';
 
@@ -23,7 +22,6 @@ root.render(
                 <Route path="/" element={<App/>}/>
                 {/* Add your routes here */}
                 { loginRoute }
-                { bookRoutes }
                 { vacationRequestRoutes }
                 <Route path='*' element={<NotFound/>} />
             </Routes>

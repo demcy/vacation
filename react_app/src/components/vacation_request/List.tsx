@@ -23,7 +23,7 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
       {error && <div className="alert alert-danger">{error.message}</div>}
 
       <p>
-        <Link to="create" className="btn btn-primary">
+        <Link to="/vacation_requests/create" className="btn btn-primary">
           Create
         </Link>
       </p>
