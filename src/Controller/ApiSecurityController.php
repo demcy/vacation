@@ -17,13 +17,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ApiSecurityController extends AbstractController
 {
-    const string VERIFY_URL = "app_api_verify";
+    const string VERIFY_URL = "app_verify";
     public function __construct(
         private readonly RegistrationService $registrationService,
         private readonly NormalizerInterface $normalizer,
     ) {}
 
-    #[Route('api/register', name: 'app_api_register', methods: ['POST'])]
+    #[Route('register', name: 'app_register', methods: ['POST'])]
     public function register(Request $request, ValidatorInterface $validator): Response
     {
         $email = $request->getPayload()->get('email');
@@ -103,7 +103,7 @@ class ApiSecurityController extends AbstractController
         }
     }
 
-    #[Route('api/verify_registration', name: self::VERIFY_URL)]
+    #[Route('verify_registration', name: self::VERIFY_URL)]
     public function verify(Request $request): Response
     {
         if ($id = $request->get('id')) {
@@ -132,7 +132,7 @@ class ApiSecurityController extends AbstractController
         );
     }
 
-    #[Route(path: 'api/login', name: 'app_api_login', methods: ['POST'])]
+    #[Route(path: 'login', name: 'app_login', methods: ['POST'])]
     public function login(#[CurrentUser] $user = null): Response
     {
         if ($this->registrationService->isAccountVerified($user->getEmail())) {
@@ -155,7 +155,7 @@ class ApiSecurityController extends AbstractController
         );
     }
 
-    #[Route(path: 'api/logout', name: 'app_api_logout')]
+    #[Route(path: 'logout', name: 'app_logout')]
     public function logout(): Response
     {
         return $this->json([

@@ -18,6 +18,10 @@ DirectoryIndex index.php
 </IfModule>
 
 <IfModule mod_rewrite.c>
+    # Header set Access-Control-Allow-Origin "http://172.23.0.6:9005"
+    # Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+    # Header set Access-Control-Allow-Headers "Content-Type", "Authorization"
+    # Header set Access-Control-Allow-Credentials "true"
     # This Option needs to be enabled for RewriteRule, otherwise it will show an error like
     # 'Options FollowSymLinks or SymLinksIfOwnerMatch is off which implies that RewriteRule directive is forbidden'
     Options +SymLinksIfOwnerMatch

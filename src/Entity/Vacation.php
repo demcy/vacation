@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['vacation:read']],
     denormalizationContext: ['groups' => ['vacation:write']],
     security: "is_granted('ROLE_USER')",
-    processor: VacationSetOwnerProcessor::class
+    processor: VacationSetOwnerProcessor::class  // Ensure JSON-LD is listed
 )]
 #[VacationDaysNumber]
 class Vacation

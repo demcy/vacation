@@ -30,7 +30,7 @@ Content-Type = application/ld+json
 PATCH = application/merge-patch+json
 
 ```
-fetch('/api/login', {
+fetch('/login', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',

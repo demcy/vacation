@@ -64,8 +64,8 @@ const normalizeAuth = (auth: string) => {
 // Error handling
 const regularHandler = (response: Response, json: any) => {
   const error =
-    json["hydra:description"] ||
-    json["hydra:title"] ||
+    json["description"] ||
+    json["title"] ||
     json["message"] ||
     "An error occurred.";
 
@@ -78,8 +78,8 @@ const submissionHandler = (response: Response, json: any) => {
   }
 
   const error =
-    json["hydra:description"] ||
-    json["hydra:title"] ||
+    json["description"] ||
+    json["title"] ||
     json["message"] ||
     "An error occurred.";
 
@@ -101,12 +101,15 @@ const submissionHandler = (response: Response, json: any) => {
 
 const useFetch = (): IFetchStore => {
   const [auth, setAuth] = useState("");
-
   return {
     setAuth,
 
     fetch(input, init = {}) {
       input = normalizeInput(input);
+      init = {
+        ...init,
+        credentials: 'include', // This ensures that cookies and credentials are included
+      };
       init = [
         normalizeHeaders,
         normalizeContentType,
@@ -137,7 +140,6 @@ const useFetch = (): IFetchStore => {
             submissionHandler(data.response, data.json);
             regularHandler(data.response, data.json);
           }
-
           return data;
         });
     },

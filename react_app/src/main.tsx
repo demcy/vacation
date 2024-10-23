@@ -7,6 +7,7 @@ import 'font-awesome/css/font-awesome.css';
 import App from './App';
 import bookRoutes from './routes/book';
 import vacationRequestRoutes from './routes/vacation_request';
+import loginRoute from './routes/login';
 
 const NotFound = () => (
     <h1>Not Found</h1>
@@ -21,6 +22,7 @@ root.render(
             <Routes>
                 <Route path="/" element={<App/>}/>
                 {/* Add your routes here */}
+                { loginRoute }
                 { bookRoutes }
                 { vacationRequestRoutes }
                 <Route path='*' element={<NotFound/>} />

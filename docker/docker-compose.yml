@@ -87,6 +87,8 @@ services:
     environment:
       NODE_ENV: development
     command: ["npm", "run", "dev"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     #command: ["tail", "-f", "/dev/null"]  # Keeps the container running
     tty: true
     networks:
