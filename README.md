@@ -8,7 +8,7 @@ cd vacation
 ```
 docker/up.sh
 ```
-3. START BASH SHELL INSIDE PHP-FPM CONTAINER TO INTERACT WITH IT DIRECTLY
+4. START BASH SHELL INSIDE PHP-FPM CONTAINER TO INTERACT WITH IT DIRECTLY
 ```
 docker/php.sh
 ```
@@ -16,19 +16,23 @@ docker/php.sh
 ```
 symfony console doctrine:schema:create
 ```
-
+5. GO TO WEB PAGE TO MAKE TESTS
+[http://localhost:9005](http://localhost:9005)
+6. NEXT NECESSARY LINK TO CONFIRM REGISTERED EMAIL
+[http://localhost:9005](https://localhost:9004)
 ## DEVELOPMENT SECTION
-http://localhost:9000
-https://localhost:9001
-https://localhost:9002
-https://localhost:9004
+###USED PORTS
+-HTTP: [http://localhost:9005](http://localhost:9000)
+-HTTPS: [http://localhost:9005](https://localhost:9001)
+-MYSQL: [http://localhost:9005](http://localhost:9002)
+-MAILCATCHER: [http://localhost:9005](http://localhost:9004)
+-REACT APP: [http://localhost:9005](http://localhost:9005)
+###COMMANDS
 * TO UPDATE SCHEMA
 ```
 symfony console doctrine:schema:update --force
 ```
-Content-Type = application/ld+json
-PATCH = application/merge-patch+json
-
+*** TO USE WEB CONSOLE
 ```
 fetch('/login', {
     method: 'POST',
@@ -53,4 +57,9 @@ fetch('/login', {
     console.error('Error:', error);
 });
 ```
+###HEADERS
+Content-Type = application/ld+json
+PATCH = application/merge-patch+json
+
+
 
