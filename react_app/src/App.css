@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: 100%;
+  display: flex;
 }
 
 .logo {
@@ -39,4 +41,22 @@
 
 .read-the-docs {
   color: #888;
+}
+
+body {
+  background-image: url('https://images.unsplash.com/photo-1440778303588-435521a205bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating */
+  height: 100vh; /* Full viewport height */
+  margin: 0; /* Remove default margin */
+}
+
+#auth-panel a {
+  color: white; /* Set the text color of all <a> elements to white */
+  text-decoration: none; /* Optional: remove underline from links */
+}
+
+#auth-panel a:hover {
+  color: lightgray; /* Optional: change color on hover for better visibility */
 }

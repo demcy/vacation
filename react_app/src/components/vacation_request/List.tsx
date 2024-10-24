@@ -16,7 +16,7 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
   const items = (retrieved && retrieved["member"]) || [];
 
   return (
-    <div>
+    <div className="h-100 w-75 mx-auto my-auto bg-body-tertiary px-5 pt-5" >
       <h1>Vacation Request List</h1>
 
       {loading && <div className="alert alert-info">Loading...</div>}
@@ -27,7 +27,7 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
           Create
         </Link>
       </p>
-
+      <div className="h-75 overflow-y-scroll">
       <table className="table table-responsive table-striped table-hover">
         <thead>
           <tr>
@@ -70,7 +70,7 @@ const ListView = ({ error, loading, retrieved }: ListProps) => {
           ))}
         </tbody>
       </table>
-
+      </div>
       <Pagination retrieved={retrieved} />
     </div>
   );

@@ -47,7 +47,7 @@ class ApiSecurityController extends AbstractController
                 Response::HTTP_BAD_REQUEST,
             );
         }
-        if ($this->registrationService->isUserRegistered($email)) {
+        if ($this->registrationService->isUserRegistered($email) && $this->registrationService->isAccountVerified($email)) {
             return $this->json(
                 [
                     'message' => 'Email already exists.',

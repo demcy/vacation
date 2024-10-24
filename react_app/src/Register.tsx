@@ -1,19 +1,18 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault(); // Останавливаем перезагрузку страницы
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:9000/login', {
+            const response = await fetch('http://localhost:9000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,16 +20,19 @@ const LoginForm = () => {
                 body: JSON.stringify({ email, password }),
                 credentials: 'include'
             });
+
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error);
+                throw new Error(errorData.message);
             }
-            const data = await response.json();
+
             setError(null);
-            console.log('Login successful');
-            // Navigate to /vacation_requests on successful login
-            navigate('/vacation_requests');
+            setSuccess(true)
+            console.log('Register successful');
+
         } catch (err) {
+            console.log(err)
+            setSuccess(false)
             setError(err.message);
         } finally {
             setLoading(false);
@@ -39,9 +41,10 @@ const LoginForm = () => {
 
     return (
         <div className="my-auto w-75 mx-auto">
-            <h2 className="text-light display-3">Login</h2>
+            <h2 className="text-light display-3">Register</h2>
             {error && <p className="text-bg-danger" style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={handleLogin}>
+            {success && <a className="text-bg-success fs-1" href="http://localhost:9004">Follow this link to confirm your email</a>}
+            <form onSubmit={handleRegister}>
 
                 <div className="form-group my-5">
                     <label className="text-light text-bg-info fs-4" htmlFor="inputEmail">Email:</label>
@@ -69,11 +72,11 @@ const LoginForm = () => {
                     />
                 </div>
                 <button className="btn btn-primary" type="submit" disabled={loading}>
-                    {loading ? 'Logging in...' : 'Login'}
+                    {loading ? 'Registering ...' : 'Register'}
                 </button>
             </form>
         </div>
     );
 };
 
-export default LoginForm;
+export default RegisterForm;

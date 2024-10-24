@@ -40,16 +40,6 @@ const Form = ({ onSubmit, error, reset, initialValues }: FormProps) => {
   const startDate = watch("start_date");
   const daysNumber = watch("days_number");
 
-  // Automatically calculate the end_date whenever start_date or days_number changes,
-  // but only if the end_date hasn't been manually modified.
-  useEffect(() => {
-    if (startDate && daysNumber && !isEndDateManual) {
-      const newEndDate = addDays(new Date(startDate), daysNumber);
-      setEndDate(newEndDate); // Update local state
-      setValue("end_date", newEndDate); // Update form value
-    }
-  }, [startDate, daysNumber, setValue, isEndDateManual]);
-
   // Recalculate days_number if the user manually changes end_date
   useEffect(() => {
     if (startDate && endDate && isEndDateManual) {
@@ -58,30 +48,13 @@ const Form = ({ onSubmit, error, reset, initialValues }: FormProps) => {
     }
   }, [endDate, startDate, setValue, isEndDateManual]);
 
-  // Automatically calculate the end_date whenever start_date or days_number changes
-  useEffect(() => {
-    if (startDate && daysNumber && !isEndDateManual) {
-      const newEndDate = addDays(new Date(startDate), daysNumber);
-      setEndDate(newEndDate); // Update local state
-      setValue("end_date", newEndDate); // Update form value
-    }
-  }, [startDate, daysNumber, setValue, isEndDateManual]);
-
-  // Recalculate days_number if the user manually changes end_date
-  useEffect(() => {
-    if (startDate && endDate && isEndDateManual) {
-      const days = differenceInDays(new Date(endDate), new Date(startDate));
-      setValue("days_number", days); // Update days_number
-    }
-  }, [endDate, startDate, setValue, isEndDateManual]);
-
-  // If days_number changes, recalculate end_date, even after manual end_date modification
+  // If days_number changes, recalculate end_date
   useEffect(() => {
     if (startDate && daysNumber) {
       const newEndDate = addDays(new Date(startDate), daysNumber);
       setEndDate(newEndDate); // Reset end_date after days_number change
       setIsEndDateManual(false); // Reset manual flag
-      setValue("end_date", newEndDate); // Update form
+      setValue("end_date", newEndDate.toISOString().split("T")[0]); // Update form
     }
   }, [daysNumber, startDate, setValue]);
 

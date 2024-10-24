@@ -29,7 +29,7 @@ const CreateView = ({
   }
 
   return (
-    <div>
+    <div className="mx-auto my-auto bg-body-tertiary p-5">
       <h1>Create Vacation Request</h1>
 
       {loading && (

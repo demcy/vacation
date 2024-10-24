@@ -50,7 +50,7 @@ const UpdateView = ({
   };
 
   return (
-    <div>
+    <div className="mx-auto my-auto bg-body-tertiary p-5">
       <h1>Edit Vacation Request: {item && item["@id"]}</h1>
 
       {created && (

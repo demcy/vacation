@@ -32,7 +32,7 @@ const ShowView = ({
   };
 
   return (
-    <div>
+    <div className="mx-auto my-auto bg-body-tertiary p-5">
       <h1>Show Vacation Request: {item && item["@id"]}</h1>
 
       {loading && (

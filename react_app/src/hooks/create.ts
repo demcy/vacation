@@ -28,7 +28,7 @@ const useCreate = <Resource extends ApiResource>(params: {
     },
     create(values) {
       setLoading(true);
-
+console.log('v', values)
       return fetch(params["@id"], {
         method: "POST",
         body: JSON.stringify(values),
@@ -36,7 +36,6 @@ const useCreate = <Resource extends ApiResource>(params: {
         .then(({ json }) => json)
         .then((retrieved) => setCreated(retrieved))
         .catch((e) => {
-          console.log('eeeee',e)
           setError(e);
         })
         .finally(() => setLoading(false));
