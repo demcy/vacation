@@ -21,7 +21,7 @@ symfony console doctrine:schema:create
 6. NEXT NECESSARY LINK TO CONFIRM REGISTERED EMAIL
 [http://localhost:9004](https://localhost:9004)
 ## DEVELOPMENT SECTION
-###USED PORTS
+### USED PORTS
 - HTTP: [http://localhost:9005](http://localhost:9000)
 - HTTPS: [http://localhost:9005](https://localhost:9001)
 - MYSQL: [http://localhost:9005](http://localhost:9002)
