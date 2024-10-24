@@ -32,7 +32,7 @@ symfony console doctrine:schema:create
 ```
 symfony console doctrine:schema:update --force
 ```
-*** TO USE WEB CONSOLE
+* TO USE WEB CONSOLE
 ```
 fetch('/login', {
     method: 'POST',
