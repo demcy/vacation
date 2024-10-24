@@ -27,7 +27,7 @@ symfony console doctrine:schema:create
 - MYSQL: [http://localhost:9005](http://localhost:9002)
 - MAILCATCHER: [http://localhost:9005](http://localhost:9004)
 - REACT APP: [http://localhost:9005](http://localhost:9005)
-###COMMANDS
+### COMMANDS
 * TO UPDATE SCHEMA
 ```
 symfony console doctrine:schema:update --force
@@ -57,7 +57,7 @@ fetch('/login', {
     console.error('Error:', error);
 });
 ```
-###HEADERS
+### HEADERS
 * Content-Type = application/ld+json
 * PATCH = application/merge-patch+json
 
