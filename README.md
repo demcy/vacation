@@ -6,7 +6,7 @@ cd vacation
 ```
 2. START SERVER
 ```
-docker/up.sh
+docker/up.sh --build
 ```
 4. START BASH SHELL INSIDE PHP-FPM CONTAINER TO INTERACT WITH IT DIRECTLY
 ```
